@@ -1,0 +1,306 @@
+// This is your Prisma schema file
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modèle Utilisateur
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String?
+  role          UserRole  @default(TRAINER)
+  badges        Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  collections   Collection[]
+  teams         Team[]
+  medicalRecords MedicalRecord[]
+
+  @@map("users")
+}
+
+enum UserRole {
+  TRAINER
+  HEALER
+  ADMIN
+}
+
+// Modèle Pokémon (Base de données encyclopédique)
+model Pokemon {
+  id                Int       @id @default(autoincrement())
+  pokedexNumber     Int       @unique
+  name              String
+  nameFr            String
+  height            Float     // en mètres
+  weight            Float     // en kg
+  description       String    @db.Text
+  types             PokemonType[]
+
+  // Apparence
+  hasGenderDifference Boolean @default(false)
+  genderDifferenceDesc String? @db.Text
+  spriteUrl         String
+  spriteShinyUrl    String
+  spriteFemaleUrl   String?
+  spriteShinyFemaleUrl String?
+
+  // Évolution
+  evolutionCondition String?  @db.Text
+  evolvesFromId     Int?
+  evolvesFrom       Pokemon?  @relation("PokemonEvolution", fields: [evolvesFromId], references: [id])
+  evolvesTo         Pokemon[] @relation("PokemonEvolution")
+
+  // Reproduction
+  eggType           String
+  eggCycles         Int
+
+  // Stats de base
+  hp                Int
+  attack            Int
+  defense           Int
+  specialAttack     Int
+  specialDefense    Int
+  speed             Int
+
+  // Capacités
+  abilities         Ability[]
+  moves             PokemonMove[]
+
+  // Relations
+  collectionEntries CollectionEntry[]
+  teamMembers       TeamMember[]
+  medicalRecords    MedicalRecord[]
+
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@map("pokemon")
+}
+
+// Types de Pokémon
+model PokemonType {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  nameFr      String
+  color       String   // Couleur hex pour l'affichage
+  icon        String?  // URL de l'icône
+
+  pokemon     Pokemon  @relation(fields: [pokemonId], references: [id])
+  pokemonId   Int
+
+  @@map("pokemon_types")
+}
+
+// Capacités/Talents
+model Ability {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  nameFr      String
+  description String   @db.Text
+  isHidden    Boolean  @default(false)
+
+  pokemon     Pokemon  @relation(fields: [pokemonId], references: [id])
+  pokemonId   Int
+
+  @@map("abilities")
+}
+
+// Attaques/Capacités
+model Move {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  nameFr      String
+  type        String
+  category    MoveCategory
+  power       Int?
+  accuracy    Int?
+  pp          Int
+  description String   @db.Text
+
+  pokemonMoves PokemonMove[]
+
+  @@map("moves")
+}
+
+enum MoveCategory {
+  PHYSICAL
+  SPECIAL
+  STATUS
+}
+
+// Table de liaison Pokémon-Attaques avec conditions d'apprentissage
+model PokemonMove {
+  id              Int      @id @default(autoincrement())
+  pokemon         Pokemon  @relation(fields: [pokemonId], references: [id])
+  pokemonId       Int
+  move            Move     @relation(fields: [moveId], references: [id])
+  moveId          Int
+  learnMethod     LearnMethod
+  levelLearned    Int?     // Pour les attaques apprises par niveau
+
+  @@unique([pokemonId, moveId, learnMethod])
+  @@map("pokemon_moves")
+}
+
+enum LearnMethod {
+  LEVEL_UP
+  TM
+  HM
+  EGG
+  TUTOR
+  EVOLUTION
+}
+
+// Collection personnelle d'un utilisateur
+model Collection {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+
+  entries     CollectionEntry[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId])
+  @@map("collections")
+}
+
+// Entrée individuelle dans une collection
+model CollectionEntry {
+  id              String    @id @default(cuid())
+  collection      Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  collectionId    String
+  pokemon         Pokemon   @relation(fields: [pokemonId], references: [id])
+  pokemonId       Int
+
+  // Détails du Pokémon capturé
+  nickname        String?
+  level           Int       @default(1)
+  gender          Gender
+  isShiny         Boolean   @default(false)
+  nature          String
+  pokeball        String
+  captureDate     DateTime  @default(now())
+  isFavorite      Boolean   @default(false)
+
+  // Stats individuels (IV)
+  ivHp            Int       @default(0)
+  ivAttack        Int       @default(0)
+  ivDefense       Int       @default(0)
+  ivSpAttack      Int       @default(0)
+  ivSpDefense     Int       @default(0)
+  ivSpeed         Int       @default(0)
+
+  // Relations
+  teamMembers     TeamMember[]
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("collection_entries")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  UNKNOWN
+}
+
+// Équipes Pokémon
+model Team {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  name        String
+  isActive    Boolean  @default(false)
+
+  members     TeamMember[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("teams")
+}
+
+// Membres d'une équipe (max 6)
+model TeamMember {
+  id              String          @id @default(cuid())
+  team            Team            @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  teamId          String
+  collectionEntry CollectionEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  entryId         String
+  pokemon         Pokemon         @relation(fields: [pokemonId], references: [id])
+  pokemonId       Int
+  position        Int             // 1-6
+
+  createdAt       DateTime        @default(now())
+
+  @@unique([teamId, position])
+  @@map("team_members")
+}
+
+// Centres Pokémon
+model PokeCenter {
+  id          String   @id @default(cuid())
+  name        String
+  location    String
+  city        String
+
+  medicalRecords MedicalRecord[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("poke_centers")
+}
+
+// Dossiers médicaux
+model MedicalRecord {
+  id              String       @id @default(cuid())
+  pokemon         Pokemon      @relation(fields: [pokemonId], references: [id])
+  pokemonId       Int
+  trainer         User         @relation(fields: [trainerId], references: [id])
+  trainerId       String
+  pokeCenter      PokeCenter   @relation(fields: [pokeCenterId], references: [id])
+  pokeCenterId    String
+
+  // Informations médicales
+  status          MedicalStatus
+  healthPercent   Int          @default(100) // 0-100
+  condition       String       // blessure, maladie, fatigue
+  diagnosis       String       @db.Text
+  treatment       String?      @db.Text
+  notes           String?      @db.Text
+
+  // Dates
+  admissionDate   DateTime     @default(now())
+  dischargeDate   DateTime?
+
+  // Données physiques au moment de l'admission
+  height          Float
+  weight          Float
+  gender          Gender
+
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@map("medical_records")
+}
+
+enum MedicalStatus {
+  IN_TREATMENT
+  UNDER_OBSERVATION
+  RECOVERED
+  CRITICAL
+}
