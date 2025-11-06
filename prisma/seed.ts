@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, UserRole } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -352,14 +352,14 @@ async function main() {
       email: 'sacha@pokemon.com',
       password: await bcrypt.hash('pikachu', 10),
       name: 'Sacha',
-      role: 'TRAINER',
+      role: UserRole.TRAINER,
       badges: 4,
     },
     {
       email: 'joelle@pokemon.com',
       password: await bcrypt.hash('soin', 10),
       name: 'Joëlle',
-      role: 'HEALER',
+      role: UserRole.HEALER,
       badges: 0,
     },
   ];

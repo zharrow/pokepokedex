@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 // DELETE /api/teams/[id] - Supprime une équipe
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -18,7 +18,7 @@ export async function DELETE(
       );
     }
 
-    const teamId = params.id;
+    const { id: teamId } = await params;
 
     // Vérifier que l'équipe appartient à l'utilisateur
     const team = await prisma.team.findUnique({
@@ -56,7 +56,7 @@ export async function DELETE(
 // PATCH /api/teams/[id] - Met à jour une équipe (nom, statut actif)
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -68,7 +68,7 @@ export async function PATCH(
       );
     }
 
-    const teamId = params.id;
+    const { id: teamId } = await params;
     const body = await request.json();
 
     // Vérifier que l'équipe appartient à l'utilisateur

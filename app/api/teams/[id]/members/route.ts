@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 // POST /api/teams/[id]/members - Ajoute un Pokémon à l'équipe
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -18,7 +18,7 @@ export async function POST(
       );
     }
 
-    const teamId = params.id;
+    const { id: teamId } = await params;
     const body = await request.json();
     const { entryId, position } = body;
 
@@ -104,7 +104,7 @@ export async function POST(
 // DELETE /api/teams/[id]/members?memberId=xxx - Retire un Pokémon de l'équipe
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -116,7 +116,7 @@ export async function DELETE(
       );
     }
 
-    const teamId = params.id;
+    const { id: teamId } = await params;
     const memberId = request.nextUrl.searchParams.get('memberId');
 
     if (!memberId) {

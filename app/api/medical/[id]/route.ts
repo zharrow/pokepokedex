@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
 // PATCH /api/medical/[id] - Met à jour un dossier médical
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -25,7 +25,7 @@ export async function PATCH(
       );
     }
 
-    const recordId = params.id;
+    const { id: recordId } = await params;
     const body = await request.json();
 
     // Si le statut passe à RECOVERED, mettre la date de sortie
@@ -66,7 +66,7 @@ export async function PATCH(
 // DELETE /api/medical/[id] - Supprime un dossier médical
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -85,7 +85,7 @@ export async function DELETE(
       );
     }
 
-    const recordId = params.id;
+    const { id: recordId } = await params;
 
     await prisma.medicalRecord.delete({
       where: { id: recordId },

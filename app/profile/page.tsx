@@ -144,7 +144,7 @@ export default function ProfilePage() {
               </span>
             </div>
             <div className="text-white/80 text-sm">
-              Membre depuis {new Date(session.user.createdAt || Date.now()).toLocaleDateString()}
+              {session.user.email}
             </div>
           </div>
 
