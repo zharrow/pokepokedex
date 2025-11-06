@@ -90,7 +90,7 @@ model Pokemon {
 // Types de Pokémon
 model PokemonType {
   id          Int      @id @default(autoincrement())
-  name        String   @unique
+  name        String
   nameFr      String
   color       String   // Couleur hex pour l'affichage
   icon        String?  // URL de l'icône
@@ -98,13 +98,14 @@ model PokemonType {
   pokemon     Pokemon  @relation(fields: [pokemonId], references: [id])
   pokemonId   Int
 
+  @@unique([name, pokemonId])
   @@map("pokemon_types")
 }
 
 // Capacités/Talents
 model Ability {
   id          Int      @id @default(autoincrement())
-  name        String   @unique
+  name        String
   nameFr      String
   description String   @db.Text
   isHidden    Boolean  @default(false)
@@ -112,6 +113,7 @@ model Ability {
   pokemon     Pokemon  @relation(fields: [pokemonId], references: [id])
   pokemonId   Int
 
+  @@unique([name, pokemonId])
   @@map("abilities")
 }
 

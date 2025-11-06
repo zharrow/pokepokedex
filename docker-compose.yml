@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # Base de données PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: pokemon-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: pokemon
+      POSTGRES_PASSWORD: pokemon123
+      POSTGRES_DB: pokemon_encyclopedia
+    ports:
+      - "5433:5432"  # Port externe 5433 pour éviter conflit avec PostgreSQL local
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pokemon -d pokemon_encyclopedia"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Application Next.js
+  app:
+    build: .
+    container_name: pokemon-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://pokemon:pokemon123@postgres:5432/pokemon_encyclopedia"
+      NEXTAUTH_SECRET: "super-secret-key-change-in-production"
+      NEXTAUTH_URL: "http://localhost:3000"
+      NODE_ENV: development
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  default:
+    name: pokemon-network

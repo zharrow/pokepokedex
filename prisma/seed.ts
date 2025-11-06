@@ -48,9 +48,25 @@ async function fetchPokemonFromAPI(id: number) {
 
 async function main() {
   console.log('Début du seed avec PokeAPI...');
+
+  // Nettoyer les données existantes
+  console.log('🧹 Nettoyage de la base de données...');
+  // Supprimer dans l'ordre des dépendances
+  await prisma.medicalRecord.deleteMany();
+  await prisma.teamMember.deleteMany();
+  await prisma.team.deleteMany();
+  await prisma.collectionEntry.deleteMany();
+  await prisma.collection.deleteMany();
+  await prisma.ability.deleteMany();
+  await prisma.pokemonType.deleteMany();
+  await prisma.pokemonMove.deleteMany();
+  await prisma.move.deleteMany();
+  await prisma.pokemon.deleteMany();
+  console.log('✅ Base de données nettoyée\n');
+
   console.log('Récupération des 151 Pokémon de Kanto...\n');
 
-  // Boucle pour récupérer les 151 Pokémon de Kanto
+  // PHASE 1: Créer tous les Pokémon sans les évolutions
   let createdCount = 0;
   for (let i = 1; i <= 151; i++) {
     try {
@@ -88,6 +104,16 @@ async function main() {
 
       // Déterminer les egg groups
       const eggGroups = speciesData.egg_groups.map((g: any) => g.name).join('/');
+
+      // Vérifier si le Pokémon existe déjà
+      const existingPokemon = await prisma.pokemon.findUnique({
+        where: { pokedexNumber: i }
+      });
+
+      if (existingPokemon) {
+        console.log(`⏭️  ${frenchName} existe déjà, ignoré`);
+        continue;
+      }
 
       // Créer le Pokémon
       await prisma.pokemon.create({
@@ -131,24 +157,248 @@ async function main() {
     }
   }
 
+  console.log(`\n✓ Phase 1 terminée: ${createdCount} Pokémon créés\n`);
+
+  // PHASE 2: Ajouter les évolutions
+  console.log('📊 Phase 2: Ajout des évolutions...\n');
+  let evolutionsCount = 0;
+
+  for (let i = 1; i <= 151; i++) {
+    try {
+      const { speciesData } = await fetchPokemonFromAPI(i);
+
+      // Récupérer la chaîne d'évolution
+      if (speciesData.evolution_chain?.url) {
+        const evolutionResponse = await fetch(speciesData.evolution_chain.url);
+        const evolutionData = await evolutionResponse.json();
+
+        // Trouver l'évolution de ce Pokémon
+        const findEvolution = (chain: any, currentId: number): any => {
+          const speciesId = parseInt(chain.species.url.split('/').filter((s: string) => s).pop());
+
+          if (speciesId === currentId && chain.evolves_to.length > 0) {
+            const nextEvolution = chain.evolves_to[0];
+            const nextId = parseInt(nextEvolution.species.url.split('/').filter((s: string) => s).pop());
+
+            // Récupérer la condition d'évolution
+            let condition = 'Évolution';
+            if (nextEvolution.evolution_details?.[0]) {
+              const detail = nextEvolution.evolution_details[0];
+              if (detail.min_level) {
+                condition = `Niveau ${detail.min_level}`;
+              } else if (detail.item) {
+                condition = `Utiliser ${detail.item.name}`;
+              } else if (detail.trigger) {
+                condition = detail.trigger.name;
+              }
+            }
+
+            return { nextId, condition };
+          }
+
+          // Recherche récursive
+          for (const evo of chain.evolves_to) {
+            const result = findEvolution(evo, currentId);
+            if (result) return result;
+          }
+
+          return null;
+        };
+
+        const evolution = findEvolution(evolutionData.chain, i);
+
+        if (evolution && evolution.nextId <= 151) {
+          const pokemon = await prisma.pokemon.findUnique({
+            where: { pokedexNumber: i }
+          });
+
+          const evolvesTo = await prisma.pokemon.findUnique({
+            where: { pokedexNumber: evolution.nextId }
+          });
+
+          if (pokemon && evolvesTo) {
+            await prisma.pokemon.update({
+              where: { id: evolvesTo.id },
+              data: {
+                evolvesFromId: pokemon.id,
+                evolutionCondition: evolution.condition
+              }
+            });
+            evolutionsCount++;
+            console.log(`✓ ${pokemon.nameFr} → ${evolvesTo.nameFr} (${evolution.condition})`);
+          }
+        }
+      }
+
+      await new Promise(resolve => setTimeout(resolve, 100));
+    } catch (error) {
+      console.error(`Erreur lors de l'ajout des évolutions pour #${i}:`, error);
+    }
+  }
+
+  console.log(`\n✓ Phase 2 terminée: ${evolutionsCount} évolutions ajoutées\n`);
+
+  // PHASE 3: Ajouter les capacités (moves)
+  console.log('⚔️ Phase 3: Ajout des capacités...\n');
+  let movesCount = 0;
+  const processedMoves = new Set<string>();
+
+  for (let i = 1; i <= 151; i++) {
+    try {
+      const { data, frenchName } = await fetchPokemonFromAPI(i);
+
+      const pokemon = await prisma.pokemon.findUnique({
+        where: { pokedexNumber: i }
+      });
+
+      if (!pokemon) continue;
+
+      // Limiter à 10 moves par Pokémon pour ne pas surcharger
+      const moves = data.moves.slice(0, 10);
+
+      for (const moveData of moves) {
+        const moveName = moveData.move.name;
+
+        // Récupérer les détails du move
+        let move = await prisma.move.findUnique({
+          where: { name: moveName }
+        });
+
+        // Si le move n'existe pas, le créer
+        if (!move && !processedMoves.has(moveName)) {
+          try {
+            const moveResponse = await fetch(moveData.move.url);
+            const moveDetails = await moveResponse.json();
+
+            const moveNameFr = moveDetails.names?.find((n: any) => n.language.name === 'fr')?.name || moveName;
+            const moveDescription = moveDetails.flavor_text_entries
+              ?.find((entry: any) => entry.language.name === 'fr')?.flavor_text
+              ?.replace(/\n/g, ' ') || 'Capacité Pokémon';
+
+            let category = 'STATUS';
+            if (moveDetails.damage_class?.name === 'physical') category = 'PHYSICAL';
+            if (moveDetails.damage_class?.name === 'special') category = 'SPECIAL';
+
+            move = await prisma.move.create({
+              data: {
+                name: moveName,
+                nameFr: moveNameFr,
+                type: moveDetails.type?.name || 'normal',
+                category: category as any,
+                power: moveDetails.power || null,
+                accuracy: moveDetails.accuracy || null,
+                pp: moveDetails.pp || 10,
+                description: moveDescription
+              }
+            });
+
+            processedMoves.add(moveName);
+            await new Promise(resolve => setTimeout(resolve, 50));
+          } catch (moveError) {
+            console.error(`Erreur lors de la création du move ${moveName}:`, moveError);
+            continue;
+          }
+        }
+
+        if (move) {
+          // Déterminer la méthode d'apprentissage
+          const versionDetail = moveData.version_group_details[0];
+          let learnMethod = 'LEVEL_UP';
+          let levelLearned = null;
+
+          if (versionDetail) {
+            const methodName = versionDetail.move_learn_method?.name;
+            if (methodName === 'machine') learnMethod = 'TM';
+            else if (methodName === 'egg') learnMethod = 'EGG';
+            else if (methodName === 'tutor') learnMethod = 'TUTOR';
+
+            if (methodName === 'level-up') {
+              levelLearned = versionDetail.level_learned_at || 1;
+            }
+          }
+
+          // Créer la relation Pokemon-Move
+          try {
+            await prisma.pokemonMove.create({
+              data: {
+                pokemonId: pokemon.id,
+                moveId: move.id,
+                learnMethod: learnMethod as any,
+                levelLearned: levelLearned
+              }
+            });
+            movesCount++;
+          } catch (e) {
+            // Ignorer les doublons
+          }
+        }
+      }
+
+      console.log(`✓ Capacités ajoutées pour ${frenchName}`);
+      await new Promise(resolve => setTimeout(resolve, 100));
+    } catch (error) {
+      console.error(`Erreur lors de l'ajout des capacités pour #${i}:`, error);
+    }
+  }
+
+  console.log(`\n✓ Phase 3 terminée: ${movesCount} capacités ajoutées\n`);
+
+  // Utilisateurs de test
+  console.log('\n📝 Création des utilisateurs de test...');
+  const bcrypt = require('bcryptjs');
+
+  const users = [
+    {
+      email: 'sacha@pokemon.com',
+      password: await bcrypt.hash('pikachu', 10),
+      name: 'Sacha',
+      role: 'TRAINER',
+      badges: 4,
+    },
+    {
+      email: 'joelle@pokemon.com',
+      password: await bcrypt.hash('soin', 10),
+      name: 'Joëlle',
+      role: 'HEALER',
+      badges: 0,
+    },
+  ];
+
+  for (const user of users) {
+    const existingUser = await prisma.user.findUnique({
+      where: { email: user.email },
+    });
+    if (!existingUser) {
+      await prisma.user.create({ data: user });
+      console.log(`✓ Utilisateur ${user.name} créé`);
+    }
+  }
+
   // Centres Pokémon
+  console.log('\n🏥 Création des centres Pokémon...');
   const pokemonCenters = [
-    { name: 'Centre Pokémon Bourg Palette', location: 'Route 1', city: 'Bourg Palette' },
-    { name: 'Centre Pokémon Argenta', location: 'Centre-ville', city: 'Argenta' },
-    { name: 'Centre Pokémon Azuria', location: 'Centre-ville', city: 'Azuria' },
-    { name: 'Centre Pokémon Carmin sur Mer', location: 'Port', city: 'Carmin sur Mer' },
-    { name: 'Centre Pokémon Safrania', location: 'Centre-ville', city: 'Safrania' },
-    { name: 'Centre Pokémon Céladopole', location: 'Centre-ville', city: 'Céladopole' },
-    { name: 'Centre Pokémon Cramois Île', location: 'Volcan', city: 'Cramois Île' },
-    { name: 'Centre Pokémon Parmanie', location: 'Centre-ville', city: 'Parmanie' },
+    { name: 'Centre Pokémon d\'Argenta', location: 'Centre-ville', city: 'Argenta' },
+    { name: 'Centre Pokémon d\'Azuria', location: 'Centre-ville', city: 'Azuria' },
+    { name: 'Centre Pokémon de Carmin sur Mer', location: 'Port', city: 'Carmin sur Mer' },
+    { name: 'Centre Pokémon de Safrania', location: 'Centre-ville', city: 'Safrania' },
+    { name: 'Centre Pokémon de Cramois\'Île', location: 'Volcan', city: 'Cramois\'Île' },
   ];
 
   for (const center of pokemonCenters) {
-    await prisma.pokeCenter.create({ data: center });
+    const existingCenter = await prisma.pokeCenter.findFirst({
+      where: { name: center.name },
+    });
+    if (!existingCenter) {
+      await prisma.pokeCenter.create({ data: center });
+      console.log(`✓ Centre ${center.name} créé`);
+    }
   }
 
-  console.log('\n✓ Seed terminé!');
+  console.log('\n✨ Seed terminé avec succès!');
   console.log(`✓ Pokémon créés: ${createdCount}/151`);
+  console.log(`✓ Évolutions ajoutées: ${evolutionsCount}`);
+  console.log(`✓ Capacités ajoutées: ${movesCount}`);
+  console.log(`✓ Utilisateurs de test créés: ${users.length}`);
   console.log(`✓ Centres Pokémon créés: ${pokemonCenters.length}`);
 }
 

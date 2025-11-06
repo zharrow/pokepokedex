@@ -2,11 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Police Pokémon locale */
 @font-face {
-  font-family: 'Pokemon';
-  src: url('/fonts/Pokemon.ttf') format('truetype');
+  font-family: 'PokemonSolid';
+  src: url('/fonts/PokemonSolid.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
+}
+
+/* Classe utilitaire pour utiliser la police Pokémon (logo uniquement) */
+.font-pokemon {
+  font-family: 'PokemonSolid', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 :root {
@@ -22,5 +31,38 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* 3D Card Flip Styles */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  /* Pixelated sprites for retro Pokemon look */
+  .pixelated {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+
+  /* Line clamp utilities */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }

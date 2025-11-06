@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import PokemonCard from '@/components/PokemonCard';
 
 interface PokemonType {
   id: number;
@@ -11,13 +10,26 @@ interface PokemonType {
   color: string;
 }
 
+interface Ability {
+  id: number;
+  name: string;
+  nameFr: string;
+  description: string;
+  isHidden: boolean;
+}
+
 interface Pokemon {
   id: number;
   pokedexNumber: number;
   name: string;
   nameFr: string;
+  height: number;
+  weight: number;
+  description: string;
   spriteUrl: string;
+  spriteShinyUrl: string;
   types: PokemonType[];
+  abilities: Ability[];
 }
 
 export default function EncyclopediaPage() {
@@ -25,6 +37,7 @@ export default function EncyclopediaPage() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [showShiny, setShowShiny] = useState(false);
 
   useEffect(() => {
     fetchPokemon();
@@ -49,76 +62,76 @@ export default function EncyclopediaPage() {
   };
 
   const types = [
-    'Normal', 'Feu', 'Eau', 'Électrik', 'Plante', 'Glace', 
-    'Combat', 'Poison', 'Sol', 'Vol', 'Psy', 'Insecte', 
-    'Roche', 'Spectre', 'Dragon'
+    'Normal', 'Feu', 'Eau', 'Électrik', 'Plante', 'Glace',
+    'Combat', 'Poison', 'Sol', 'Vol', 'Psy', 'Insecte',
+    'Roche', 'Spectre', 'Dragon', 'Ténèbres', 'Acier', 'Fée'
   ];
 
   return (
     <div className="py-8">
-      <h1 className="text-4xl font-bold text-center mb-8 text-pokemon-blue">
+      <h1 className="text-4xl font-bold text-center mb-2 text-red-600">
         Encyclopédie Pokémon
       </h1>
+      <p className="text-center text-gray-600 mb-8">
+        Découvrez les 151 Pokémon de la région de Kanto
+      </p>
 
-      <div className="mb-8 flex flex-wrap gap-4 justify-center">
-        <input
-          type="text"
-          placeholder="Rechercher un Pokémon..."
-          className="px-4 py-2 border rounded-lg w-64"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        
-        <select
-          className="px-4 py-2 border rounded-lg"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
-          <option value="">Tous les types</option>
-          {types.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
+      {/* Filters and Search */}
+      <div className="mb-8 bg-white rounded-xl shadow-md p-6">
+        <div className="flex flex-wrap gap-4 items-center justify-center mb-4">
+          <input
+            type="text"
+            placeholder="Rechercher par nom ou numéro..."
+            className="px-4 py-2 border border-gray-300 rounded-lg w-64 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+
+          <select
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          >
+            <option value="">Tous les types</option>
+            {types.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+
+          <button
+            onClick={() => setShowShiny(!showShiny)}
+            className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              showShiny
+                ? 'bg-yellow-400 text-yellow-900 shadow-lg'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            {showShiny ? '✨ Mode Shiny' : '✨ Voir Shiny'}
+          </button>
+        </div>
+
+        <div className="text-center text-sm text-gray-600">
+          <span className="font-semibold text-red-600">{pokemon.length}</span> Pokémon trouvés
+        </div>
       </div>
 
+      {/* Loading State */}
       {loading ? (
-        <div className="text-center py-12">Chargement...</div>
+        <div className="flex flex-col items-center justify-center py-12">
+          <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin mb-4"></div>
+          <p className="text-gray-600">Chargement des Pokémon...</p>
+        </div>
+      ) : pokemon.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-xl text-gray-600">Aucun Pokémon trouvé</p>
+          <p className="text-sm text-gray-500 mt-2">Essayez de modifier vos filtres</p>
+        </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {pokemon.map((poke) => (
-            <Link
-              key={poke.id}
-              href={'/encyclopedia/' + poke.id}
-              className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all hover:scale-105 p-4"
-            >
-              <div className="text-center">
-                <div className="text-sm text-gray-500 mb-2">
-                  #{poke.pokedexNumber.toString().padStart(3, '0')}
-                </div>
-                <div className="relative w-32 h-32 mx-auto mb-4">
-                  <Image
-                    src={poke.spriteUrl}
-                    alt={poke.nameFr}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                <h3 className="font-bold text-lg mb-2">{poke.nameFr}</h3>
-                <div className="flex gap-2 justify-center flex-wrap">
-                  {poke.types.map((type) => (
-                    <span
-                      key={type.id}
-                      className="px-3 py-1 rounded-full text-white text-sm"
-                      style={{ backgroundColor: type.color }}
-                    >
-                      {type.nameFr}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Link>
+            <PokemonCard key={poke.id} pokemon={poke} showShiny={showShiny} />
           ))}
         </div>
       )}

@@ -4,10 +4,11 @@ import { prisma } from '@/lib/prisma';
 // GET /api/pokemon/[id] - Récupère un Pokémon par son ID
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const { id: idParam } = await params;
+    const id = parseInt(idParam);
 
     const pokemon = await prisma.pokemon.findUnique({
       where: { id },

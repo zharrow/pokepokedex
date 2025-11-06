@@ -1,0 +1,553 @@
+Début du seed avec PokeAPI...
+🧹 Nettoyage de la base de données...
+✅ Base de données nettoyée
+
+Récupération des 151 Pokémon de Kanto...
+
+Récupération du Pokémon #1...
+✓ Bulbizarre créé avec succès
+Récupération du Pokémon #2...
+✓ Herbizarre créé avec succès
+Récupération du Pokémon #3...
+✓ Florizarre créé avec succès
+Récupération du Pokémon #4...
+✓ Salamèche créé avec succès
+Récupération du Pokémon #5...
+✓ Reptincel créé avec succès
+Récupération du Pokémon #6...
+✓ Dracaufeu créé avec succès
+Récupération du Pokémon #7...
+✓ Carapuce créé avec succès
+Récupération du Pokémon #8...
+✓ Carabaffe créé avec succès
+Récupération du Pokémon #9...
+✓ Tortank créé avec succès
+Récupération du Pokémon #10...
+✓ Chenipan créé avec succès
+Récupération du Pokémon #11...
+✓ Chrysacier créé avec succès
+Récupération du Pokémon #12...
+✓ Papilusion créé avec succès
+Récupération du Pokémon #13...
+✓ Aspicot créé avec succès
+Récupération du Pokémon #14...
+✓ Coconfort créé avec succès
+Récupération du Pokémon #15...
+✓ Dardargnan créé avec succès
+Récupération du Pokémon #16...
+✓ Roucool créé avec succès
+Récupération du Pokémon #17...
+✓ Roucoups créé avec succès
+Récupération du Pokémon #18...
+✓ Roucarnage créé avec succès
+Récupération du Pokémon #19...
+✓ Rattata créé avec succès
+Récupération du Pokémon #20...
+✓ Rattatac créé avec succès
+Récupération du Pokémon #21...
+✓ Piafabec créé avec succès
+Récupération du Pokémon #22...
+✓ Rapasdepic créé avec succès
+Récupération du Pokémon #23...
+✓ Abo créé avec succès
+Récupération du Pokémon #24...
+✓ Arbok créé avec succès
+Récupération du Pokémon #25...
+✓ Pikachu créé avec succès
+Récupération du Pokémon #26...
+✓ Raichu créé avec succès
+Récupération du Pokémon #27...
+✓ Sabelette créé avec succès
+Récupération du Pokémon #28...
+✓ Sablaireau créé avec succès
+Récupération du Pokémon #29...
+✓ Nidoran♀ créé avec succès
+Récupération du Pokémon #30...
+✓ Nidorina créé avec succès
+Récupération du Pokémon #31...
+✓ Nidoqueen créé avec succès
+Récupération du Pokémon #32...
+✓ Nidoran♂ créé avec succès
+Récupération du Pokémon #33...
+✓ Nidorino créé avec succès
+Récupération du Pokémon #34...
+✓ Nidoking créé avec succès
+Récupération du Pokémon #35...
+✓ Mélofée créé avec succès
+Récupération du Pokémon #36...
+✓ Mélodelfe créé avec succès
+Récupération du Pokémon #37...
+✓ Goupix créé avec succès
+Récupération du Pokémon #38...
+✓ Feunard créé avec succès
+Récupération du Pokémon #39...
+✓ Rondoudou créé avec succès
+Récupération du Pokémon #40...
+✓ Grodoudou créé avec succès
+Récupération du Pokémon #41...
+✓ Nosferapti créé avec succès
+Récupération du Pokémon #42...
+✓ Nosferalto créé avec succès
+Récupération du Pokémon #43...
+✓ Mystherbe créé avec succès
+Récupération du Pokémon #44...
+✓ Ortide créé avec succès
+Récupération du Pokémon #45...
+✓ Rafflesia créé avec succès
+Récupération du Pokémon #46...
+✓ Paras créé avec succès
+Récupération du Pokémon #47...
+✓ Parasect créé avec succès
+Récupération du Pokémon #48...
+✓ Mimitoss créé avec succès
+Récupération du Pokémon #49...
+✓ Aéromite créé avec succès
+Récupération du Pokémon #50...
+✓ Taupiqueur créé avec succès
+Récupération du Pokémon #51...
+✓ Triopikeur créé avec succès
+Récupération du Pokémon #52...
+✓ Miaouss créé avec succès
+Récupération du Pokémon #53...
+✓ Persian créé avec succès
+Récupération du Pokémon #54...
+✓ Psykokwak créé avec succès
+Récupération du Pokémon #55...
+✓ Akwakwak créé avec succès
+Récupération du Pokémon #56...
+✓ Férosinge créé avec succès
+Récupération du Pokémon #57...
+✓ Colossinge créé avec succès
+Récupération du Pokémon #58...
+✓ Caninos créé avec succès
+Récupération du Pokémon #59...
+✓ Arcanin créé avec succès
+Récupération du Pokémon #60...
+✓ Ptitard créé avec succès
+Récupération du Pokémon #61...
+✓ Têtarte créé avec succès
+Récupération du Pokémon #62...
+✓ Tartard créé avec succès
+Récupération du Pokémon #63...
+✓ Abra créé avec succès
+Récupération du Pokémon #64...
+✓ Kadabra créé avec succès
+Récupération du Pokémon #65...
+✓ Alakazam créé avec succès
+Récupération du Pokémon #66...
+✓ Machoc créé avec succès
+Récupération du Pokémon #67...
+✓ Machopeur créé avec succès
+Récupération du Pokémon #68...
+✓ Mackogneur créé avec succès
+Récupération du Pokémon #69...
+✓ Chétiflor créé avec succès
+Récupération du Pokémon #70...
+✓ Boustiflor créé avec succès
+Récupération du Pokémon #71...
+✓ Empiflor créé avec succès
+Récupération du Pokémon #72...
+✓ Tentacool créé avec succès
+Récupération du Pokémon #73...
+✓ Tentacruel créé avec succès
+Récupération du Pokémon #74...
+✓ Racaillou créé avec succès
+Récupération du Pokémon #75...
+✓ Gravalanch créé avec succès
+Récupération du Pokémon #76...
+✓ Grolem créé avec succès
+Récupération du Pokémon #77...
+✓ Ponyta créé avec succès
+Récupération du Pokémon #78...
+✓ Galopa créé avec succès
+Récupération du Pokémon #79...
+✓ Ramoloss créé avec succès
+Récupération du Pokémon #80...
+✓ Flagadoss créé avec succès
+Récupération du Pokémon #81...
+✓ Magnéti créé avec succès
+Récupération du Pokémon #82...
+✓ Magnéton créé avec succès
+Récupération du Pokémon #83...
+✓ Canarticho créé avec succès
+Récupération du Pokémon #84...
+✓ Doduo créé avec succès
+Récupération du Pokémon #85...
+✓ Dodrio créé avec succès
+Récupération du Pokémon #86...
+✓ Otaria créé avec succès
+Récupération du Pokémon #87...
+✓ Lamantine créé avec succès
+Récupération du Pokémon #88...
+✓ Tadmorv créé avec succès
+Récupération du Pokémon #89...
+✓ Grotadmorv créé avec succès
+Récupération du Pokémon #90...
+✓ Kokiyas créé avec succès
+Récupération du Pokémon #91...
+✓ Crustabri créé avec succès
+Récupération du Pokémon #92...
+✓ Fantominus créé avec succès
+Récupération du Pokémon #93...
+✓ Spectrum créé avec succès
+Récupération du Pokémon #94...
+✓ Ectoplasma créé avec succès
+Récupération du Pokémon #95...
+✓ Onix créé avec succès
+Récupération du Pokémon #96...
+✓ Soporifik créé avec succès
+Récupération du Pokémon #97...
+✓ Hypnomade créé avec succès
+Récupération du Pokémon #98...
+✓ Krabby créé avec succès
+Récupération du Pokémon #99...
+✓ Krabboss créé avec succès
+Récupération du Pokémon #100...
+✓ Voltorbe créé avec succès
+Récupération du Pokémon #101...
+✓ Électrode créé avec succès
+Récupération du Pokémon #102...
+✓ Noeunoeuf créé avec succès
+Récupération du Pokémon #103...
+✓ Noadkoko créé avec succès
+Récupération du Pokémon #104...
+✓ Osselait créé avec succès
+Récupération du Pokémon #105...
+✓ Ossatueur créé avec succès
+Récupération du Pokémon #106...
+✓ Kicklee créé avec succès
+Récupération du Pokémon #107...
+✓ Tygnon créé avec succès
+Récupération du Pokémon #108...
+✓ Excelangue créé avec succès
+Récupération du Pokémon #109...
+✓ Smogo créé avec succès
+Récupération du Pokémon #110...
+✓ Smogogo créé avec succès
+Récupération du Pokémon #111...
+✓ Rhinocorne créé avec succès
+Récupération du Pokémon #112...
+✓ Rhinoféros créé avec succès
+Récupération du Pokémon #113...
+✓ Leveinard créé avec succès
+Récupération du Pokémon #114...
+✓ Saquedeneu créé avec succès
+Récupération du Pokémon #115...
+✓ Kangourex créé avec succès
+Récupération du Pokémon #116...
+✓ Hypotrempe créé avec succès
+Récupération du Pokémon #117...
+✓ Hypocéan créé avec succès
+Récupération du Pokémon #118...
+✓ Poissirène créé avec succès
+Récupération du Pokémon #119...
+✓ Poissoroy créé avec succès
+Récupération du Pokémon #120...
+✓ Stari créé avec succès
+Récupération du Pokémon #121...
+✓ Staross créé avec succès
+Récupération du Pokémon #122...
+✓ M. Mime créé avec succès
+Récupération du Pokémon #123...
+✓ Insécateur créé avec succès
+Récupération du Pokémon #124...
+✓ Lippoutou créé avec succès
+Récupération du Pokémon #125...
+✓ Élektek créé avec succès
+Récupération du Pokémon #126...
+✓ Magmar créé avec succès
+Récupération du Pokémon #127...
+✓ Scarabrute créé avec succès
+Récupération du Pokémon #128...
+✓ Tauros créé avec succès
+Récupération du Pokémon #129...
+✓ Magicarpe créé avec succès
+Récupération du Pokémon #130...
+✓ Léviator créé avec succès
+Récupération du Pokémon #131...
+✓ Lokhlass créé avec succès
+Récupération du Pokémon #132...
+✓ Métamorph créé avec succès
+Récupération du Pokémon #133...
+✓ Évoli créé avec succès
+Récupération du Pokémon #134...
+✓ Aquali créé avec succès
+Récupération du Pokémon #135...
+✓ Voltali créé avec succès
+Récupération du Pokémon #136...
+✓ Pyroli créé avec succès
+Récupération du Pokémon #137...
+✓ Porygon créé avec succès
+Récupération du Pokémon #138...
+✓ Amonita créé avec succès
+Récupération du Pokémon #139...
+✓ Amonistar créé avec succès
+Récupération du Pokémon #140...
+✓ Kabuto créé avec succès
+Récupération du Pokémon #141...
+✓ Kabutops créé avec succès
+Récupération du Pokémon #142...
+✓ Ptéra créé avec succès
+Récupération du Pokémon #143...
+✓ Ronflex créé avec succès
+Récupération du Pokémon #144...
+✓ Artikodin créé avec succès
+Récupération du Pokémon #145...
+✓ Électhor créé avec succès
+Récupération du Pokémon #146...
+✓ Sulfura créé avec succès
+Récupération du Pokémon #147...
+✓ Minidraco créé avec succès
+Récupération du Pokémon #148...
+✓ Draco créé avec succès
+Récupération du Pokémon #149...
+✓ Dracolosse créé avec succès
+Récupération du Pokémon #150...
+✓ Mewtwo créé avec succès
+Récupération du Pokémon #151...
+✓ Mew créé avec succès
+
+✓ Phase 1 terminée: 151 Pokémon créés
+
+📊 Phase 2: Ajout des évolutions...
+
+✓ Bulbizarre → Herbizarre (Niveau 16)
+✓ Herbizarre → Florizarre (Niveau 32)
+✓ Salamèche → Reptincel (Niveau 16)
+✓ Reptincel → Dracaufeu (Niveau 36)
+✓ Carapuce → Carabaffe (Niveau 16)
+✓ Carabaffe → Tortank (Niveau 36)
+✓ Chenipan → Chrysacier (Niveau 7)
+✓ Chrysacier → Papilusion (Niveau 10)
+✓ Aspicot → Coconfort (Niveau 7)
+✓ Coconfort → Dardargnan (Niveau 10)
+✓ Roucool → Roucoups (Niveau 18)
+✓ Roucoups → Roucarnage (Niveau 36)
+✓ Rattata → Rattatac (Niveau 20)
+✓ Piafabec → Rapasdepic (Niveau 20)
+✓ Abo → Arbok (Niveau 22)
+✓ Pikachu → Raichu (Utiliser thunder-stone)
+✓ Sabelette → Sablaireau (Niveau 22)
+✓ Nidoran♀ → Nidorina (Niveau 16)
+✓ Nidorina → Nidoqueen (Utiliser moon-stone)
+✓ Nidoran♂ → Nidorino (Niveau 16)
+✓ Nidorino → Nidoking (Utiliser moon-stone)
+✓ Mélofée → Mélodelfe (Utiliser moon-stone)
+✓ Goupix → Feunard (Utiliser fire-stone)
+✓ Rondoudou → Grodoudou (Utiliser moon-stone)
+✓ Nosferapti → Nosferalto (Niveau 22)
+✓ Mystherbe → Ortide (Niveau 21)
+✓ Ortide → Rafflesia (Utiliser leaf-stone)
+✓ Paras → Parasect (Niveau 24)
+✓ Mimitoss → Aéromite (Niveau 31)
+✓ Taupiqueur → Triopikeur (Niveau 26)
+✓ Miaouss → Persian (Niveau 28)
+✓ Psykokwak → Akwakwak (Niveau 33)
+✓ Férosinge → Colossinge (Niveau 28)
+✓ Caninos → Arcanin (Utiliser fire-stone)
+✓ Ptitard → Têtarte (Niveau 25)
+✓ Têtarte → Tartard (Utiliser water-stone)
+✓ Abra → Kadabra (Niveau 16)
+✓ Kadabra → Alakazam (trade)
+✓ Machoc → Machopeur (Niveau 28)
+✓ Machopeur → Mackogneur (trade)
+✓ Chétiflor → Boustiflor (Niveau 21)
+✓ Boustiflor → Empiflor (Utiliser leaf-stone)
+✓ Tentacool → Tentacruel (Niveau 30)
+✓ Racaillou → Gravalanch (Niveau 25)
+✓ Gravalanch → Grolem (trade)
+✓ Ponyta → Galopa (Niveau 40)
+✓ Ramoloss → Flagadoss (Niveau 37)
+✓ Magnéti → Magnéton (Niveau 30)
+✓ Doduo → Dodrio (Niveau 31)
+✓ Otaria → Lamantine (Niveau 34)
+✓ Tadmorv → Grotadmorv (Niveau 38)
+✓ Kokiyas → Crustabri (Utiliser water-stone)
+✓ Fantominus → Spectrum (Niveau 25)
+✓ Spectrum → Ectoplasma (trade)
+✓ Soporifik → Hypnomade (Niveau 26)
+✓ Krabby → Krabboss (Niveau 28)
+✓ Voltorbe → Électrode (Niveau 30)
+✓ Noeunoeuf → Noadkoko (Utiliser leaf-stone)
+✓ Osselait → Ossatueur (Niveau 28)
+✓ Smogo → Smogogo (Niveau 35)
+✓ Rhinocorne → Rhinoféros (Niveau 42)
+✓ Hypotrempe → Hypocéan (Niveau 32)
+✓ Poissirène → Poissoroy (Niveau 33)
+✓ Stari → Staross (Utiliser water-stone)
+✓ Magicarpe → Léviator (Niveau 20)
+✓ Évoli → Aquali (Utiliser water-stone)
+✓ Amonita → Amonistar (Niveau 40)
+✓ Kabuto → Kabutops (Niveau 40)
+✓ Minidraco → Draco (Niveau 30)
+✓ Draco → Dracolosse (Niveau 55)
+
+✓ Phase 2 terminée: 70 évolutions ajoutées
+
+⚔️ Phase 3: Ajout des capacités...
+
+✓ Capacités ajoutées pour Bulbizarre
+✓ Capacités ajoutées pour Herbizarre
+✓ Capacités ajoutées pour Florizarre
+✓ Capacités ajoutées pour Salamèche
+✓ Capacités ajoutées pour Reptincel
+✓ Capacités ajoutées pour Dracaufeu
+✓ Capacités ajoutées pour Carapuce
+✓ Capacités ajoutées pour Carabaffe
+✓ Capacités ajoutées pour Tortank
+✓ Capacités ajoutées pour Chenipan
+✓ Capacités ajoutées pour Chrysacier
+✓ Capacités ajoutées pour Papilusion
+✓ Capacités ajoutées pour Aspicot
+✓ Capacités ajoutées pour Coconfort
+✓ Capacités ajoutées pour Dardargnan
+✓ Capacités ajoutées pour Roucool
+✓ Capacités ajoutées pour Roucoups
+✓ Capacités ajoutées pour Roucarnage
+✓ Capacités ajoutées pour Rattata
+✓ Capacités ajoutées pour Rattatac
+✓ Capacités ajoutées pour Piafabec
+✓ Capacités ajoutées pour Rapasdepic
+✓ Capacités ajoutées pour Abo
+✓ Capacités ajoutées pour Arbok
+✓ Capacités ajoutées pour Pikachu
+✓ Capacités ajoutées pour Raichu
+✓ Capacités ajoutées pour Sabelette
+✓ Capacités ajoutées pour Sablaireau
+✓ Capacités ajoutées pour Nidoran♀
+✓ Capacités ajoutées pour Nidorina
+✓ Capacités ajoutées pour Nidoqueen
+✓ Capacités ajoutées pour Nidoran♂
+✓ Capacités ajoutées pour Nidorino
+✓ Capacités ajoutées pour Nidoking
+✓ Capacités ajoutées pour Mélofée
+✓ Capacités ajoutées pour Mélodelfe
+✓ Capacités ajoutées pour Goupix
+✓ Capacités ajoutées pour Feunard
+✓ Capacités ajoutées pour Rondoudou
+✓ Capacités ajoutées pour Grodoudou
+✓ Capacités ajoutées pour Nosferapti
+✓ Capacités ajoutées pour Nosferalto
+✓ Capacités ajoutées pour Mystherbe
+✓ Capacités ajoutées pour Ortide
+✓ Capacités ajoutées pour Rafflesia
+✓ Capacités ajoutées pour Paras
+✓ Capacités ajoutées pour Parasect
+✓ Capacités ajoutées pour Mimitoss
+✓ Capacités ajoutées pour Aéromite
+✓ Capacités ajoutées pour Taupiqueur
+✓ Capacités ajoutées pour Triopikeur
+✓ Capacités ajoutées pour Miaouss
+✓ Capacités ajoutées pour Persian
+✓ Capacités ajoutées pour Psykokwak
+✓ Capacités ajoutées pour Akwakwak
+✓ Capacités ajoutées pour Férosinge
+✓ Capacités ajoutées pour Colossinge
+✓ Capacités ajoutées pour Caninos
+✓ Capacités ajoutées pour Arcanin
+✓ Capacités ajoutées pour Ptitard
+✓ Capacités ajoutées pour Têtarte
+✓ Capacités ajoutées pour Tartard
+✓ Capacités ajoutées pour Abra
+✓ Capacités ajoutées pour Kadabra
+✓ Capacités ajoutées pour Alakazam
+✓ Capacités ajoutées pour Machoc
+✓ Capacités ajoutées pour Machopeur
+✓ Capacités ajoutées pour Mackogneur
+✓ Capacités ajoutées pour Chétiflor
+✓ Capacités ajoutées pour Boustiflor
+✓ Capacités ajoutées pour Empiflor
+✓ Capacités ajoutées pour Tentacool
+✓ Capacités ajoutées pour Tentacruel
+✓ Capacités ajoutées pour Racaillou
+✓ Capacités ajoutées pour Gravalanch
+✓ Capacités ajoutées pour Grolem
+✓ Capacités ajoutées pour Ponyta
+✓ Capacités ajoutées pour Galopa
+✓ Capacités ajoutées pour Ramoloss
+✓ Capacités ajoutées pour Flagadoss
+✓ Capacités ajoutées pour Magnéti
+✓ Capacités ajoutées pour Magnéton
+✓ Capacités ajoutées pour Canarticho
+✓ Capacités ajoutées pour Doduo
+✓ Capacités ajoutées pour Dodrio
+✓ Capacités ajoutées pour Otaria
+✓ Capacités ajoutées pour Lamantine
+✓ Capacités ajoutées pour Tadmorv
+✓ Capacités ajoutées pour Grotadmorv
+✓ Capacités ajoutées pour Kokiyas
+✓ Capacités ajoutées pour Crustabri
+✓ Capacités ajoutées pour Fantominus
+✓ Capacités ajoutées pour Spectrum
+✓ Capacités ajoutées pour Ectoplasma
+✓ Capacités ajoutées pour Onix
+✓ Capacités ajoutées pour Soporifik
+✓ Capacités ajoutées pour Hypnomade
+✓ Capacités ajoutées pour Krabby
+✓ Capacités ajoutées pour Krabboss
+✓ Capacités ajoutées pour Voltorbe
+✓ Capacités ajoutées pour Électrode
+✓ Capacités ajoutées pour Noeunoeuf
+✓ Capacités ajoutées pour Noadkoko
+✓ Capacités ajoutées pour Osselait
+✓ Capacités ajoutées pour Ossatueur
+✓ Capacités ajoutées pour Kicklee
+✓ Capacités ajoutées pour Tygnon
+✓ Capacités ajoutées pour Excelangue
+✓ Capacités ajoutées pour Smogo
+✓ Capacités ajoutées pour Smogogo
+✓ Capacités ajoutées pour Rhinocorne
+✓ Capacités ajoutées pour Rhinoféros
+✓ Capacités ajoutées pour Leveinard
+✓ Capacités ajoutées pour Saquedeneu
+✓ Capacités ajoutées pour Kangourex
+✓ Capacités ajoutées pour Hypotrempe
+✓ Capacités ajoutées pour Hypocéan
+✓ Capacités ajoutées pour Poissirène
+✓ Capacités ajoutées pour Poissoroy
+✓ Capacités ajoutées pour Stari
+✓ Capacités ajoutées pour Staross
+✓ Capacités ajoutées pour M. Mime
+✓ Capacités ajoutées pour Insécateur
+✓ Capacités ajoutées pour Lippoutou
+✓ Capacités ajoutées pour Élektek
+✓ Capacités ajoutées pour Magmar
+✓ Capacités ajoutées pour Scarabrute
+✓ Capacités ajoutées pour Tauros
+✓ Capacités ajoutées pour Magicarpe
+✓ Capacités ajoutées pour Léviator
+✓ Capacités ajoutées pour Lokhlass
+✓ Capacités ajoutées pour Métamorph
+✓ Capacités ajoutées pour Évoli
+✓ Capacités ajoutées pour Aquali
+✓ Capacités ajoutées pour Voltali
+✓ Capacités ajoutées pour Pyroli
+✓ Capacités ajoutées pour Porygon
+✓ Capacités ajoutées pour Amonita
+✓ Capacités ajoutées pour Amonistar
+✓ Capacités ajoutées pour Kabuto
+✓ Capacités ajoutées pour Kabutops
+✓ Capacités ajoutées pour Ptéra
+✓ Capacités ajoutées pour Ronflex
+✓ Capacités ajoutées pour Artikodin
+✓ Capacités ajoutées pour Électhor
+✓ Capacités ajoutées pour Sulfura
+✓ Capacités ajoutées pour Minidraco
+✓ Capacités ajoutées pour Draco
+✓ Capacités ajoutées pour Dracolosse
+✓ Capacités ajoutées pour Mewtwo
+✓ Capacités ajoutées pour Mew
+
+✓ Phase 3 terminée: 1475 capacités ajoutées
+
+
+📝 Création des utilisateurs de test...
+
+🏥 Création des centres Pokémon...
+
+✨ Seed terminé avec succès!
+✓ Pokémon créés: 151/151
+✓ Évolutions ajoutées: 70
+✓ Capacités ajoutées: 1475
+✓ Utilisateurs de test créés: 2
+✓ Centres Pokémon créés: 5

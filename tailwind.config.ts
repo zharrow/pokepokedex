@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        pokemon: ['Pokemon', 'sans-serif'],
+        sans: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
+        pokemon: ['PokemonSolid', 'sans-serif'],
       },
       colors: {
         pokemon: {

@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="text-center">
-        <h1 className="text-6xl font-bold text-pokemon-blue mb-8">
+        <h1 className="text-6xl font-bold font-pokemon text-pokemon-blue mb-8">
           Bienvenue dans le Pokédex Kanto
         </h1>
         <p className="text-xl text-gray-600 mb-12">
